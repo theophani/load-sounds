@@ -7,31 +7,31 @@ var loadSounds = function(paths, callback, progress) {
 	var sounds = [];
 
 	var after = function() {
-			var done = (loaded.length + errors.length) === paths.length;
+		var done = (loaded.length + errors.length) === paths.length;
 
-			// callback is an optional trigger after all sounds loaded
-			if (done && callback) {
-				callback(sounds);
-				return;
-			}
+		// callback is an optional trigger after all sounds loaded
+		if (done && callback) {
+			callback(sounds);
+			return;
+		}
 
-			// progress is an optional intermediate callback
-			if (progress) {
-				progress(sounds);
-			}
-		};
+		// progress is an optional intermediate callback
+		if (progress) {
+			progress(sounds);
+		}
+	};
 
 	var stuffBuffer = function(buffer, i) {
-			sounds[i] = buffer;
-			loaded.push(buffer);
-			after();
-		};
+		sounds[i] = buffer;
+		loaded.push(buffer);
+		after();
+	};
 
 	var handleError = function(message, request) {
-			console.log(message, request);
-			errors.push(request);
-			after();
-	 };
+		console.log(message, request);
+		errors.push(request);
+		after();
+	};
 
 	var requests = paths.map(function(url, i) {
 		var callback = function(buffer) {

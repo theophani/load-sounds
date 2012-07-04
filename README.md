@@ -18,7 +18,7 @@ var request = loadSound(url, context, callback[, err]);
 
 #loadSounds
 
-Map function for using `loadSound` to load an area sound files into audioBuffers to be played using an audioContext.
+Map function for using `loadSound` to load an array of sound files into audioBuffers to be played using an audioContext.
 
 ##Usage
 
@@ -32,7 +32,7 @@ var paths = [
 ];
 ```
 
-Execute `loadSounds` on this area to create an array of requests.
+Execute `loadSounds` on this array to create an array of requests.
 
 ```javascript
 var requests = loadSounds(paths, [callback, progressCallback]);

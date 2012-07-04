@@ -1,49 +1,45 @@
 var paths = [
 	'woody_1.ogg',
-	'wrong_file_name.ogg',
-	'woody_5.ogg'
+	'woody_2.ogg',
+	'woody_3.ogg',
+	'woody_4.ogg',
+	'woody_5.ogg',
 ];
 
-var ready = function (sounds) {
-	if (sounds[0]) {
-		playSound(sounds[0]);
-	}
-	if (sounds[1]) {
-		playSound(sounds[1]);
-	}
-	if (sounds[2]) {
-		setTimeout(function () {
-			playSound(sounds[2]);
-		}, 500);
-	}
+var makeDiv = function (i, sound) {
+	var div = document.createElement('div');
+	div.className = 'key';
+	div.style.backgroundColor = '#ff00'+(18*(1+i));
+	div.addEventListener('click', function () {
+		playSound(sound);
+	});
+	document.body.appendChild(div);
+};
 
-	// test the interface
-	console.log(
-		requests.errors.length === 1,
-		requests.loaded.length === 2
-	);
+var addKeys = function (sounds) {
+	document.addEventListener('keydown', function (e) {
+		var key = e.keyCode - 48;
+		if (key > 0 && key < 6) {
+			playSound(sounds[key-1]);
+		}
+	});
+
+	var p = document.createElement('p');
+	p.innerHTML = 'Click to play<br />or use the numbers keys from 1 - 5.'
+	document.body.appendChild(p);
+};
+
+var ready = function (sounds) {
+	sounds.forEach(function (sound, i) {
+		setTimeout(function () {
+			playSound(sound);
+			makeDiv(i, sound);
+		}, 100 * i);
+	});
+
+	setTimeout(function () {
+		addKeys(sounds);
+	}, 100 * sounds.length);
 };
 
 var requests = loadSounds(paths, ready);
-
-var testInterface = function () {
-	var paths = [
-		'woody_1.ogg',
-		'woody_2.ogg',
-		'woody_3.ogg',
-		'woody_4.ogg',
-		'woody_5.ogg',
-	];
-
-	var ready = function (sounds) {
-		sounds.forEach(function (sound, i) {
-			setTimeout(function () {
-				playSound(sound);
-			}, 100 * i);
-		});
-	};
-
-	var requests = loadSounds(paths, ready);
-};
-
-setTimeout(testInterface, 1000);

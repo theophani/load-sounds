@@ -9,10 +9,9 @@ var loadSounds = function(paths, callback, progress) {
 	var after = function() {
 		var done = (loaded.length + errors.length) === paths.length;
 
-		// callback is an optional trigger after all sounds loaded
+		// if callback exists, execute it after all sounds have loaded
 		if (done && callback) {
 			callback(sounds);
-			return;
 		}
 
 		// progress is an optional intermediate callback

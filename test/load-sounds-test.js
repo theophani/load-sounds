@@ -1,7 +1,7 @@
 var paths = {
 	'woody1': 'woody_1.ogg',
 	'woody2': 'wrong_file_name.ogg',
-	'woody5': 'woody_5.ogg',
+	'woody5': 'woody_5.ogg'
 };
 
 var ready = function () {
@@ -19,3 +19,25 @@ var ready = function () {
 };
 
 var sounds = loadSounds(paths, ready);
+
+var testInterface = function () {
+	var paths = {
+		'woody1': 'woody_1.ogg',
+		'woody2': 'woody_2.ogg',
+		'woody3': 'woody_3.ogg',
+		'woody4': 'woody_4.ogg',
+		'woody5': 'woody_5.ogg',
+	};
+
+	var ready = function () {
+		sounds.loaded.forEach(function (sound, i) {
+			setTimeout(function () {
+				playSound(sounds[sound.key]);
+			}, 100 * i);
+		});
+	};
+
+	var sounds = loadSounds(paths, ready);
+};
+
+setTimeout(testInterface, 1000);

@@ -4,10 +4,10 @@ var callback = function (buffer) {
 	playSound(buffer);
 };
 
-var err = function (message, response, url) {
-	console.log(message, response, url);
+var err = function (message, request) {
+	console.log(message, request);
 };
 
-var xhr = loadSound('woody_5.ogg',  context, callback, err);
+var request = loadSound('woody_5.ogg',  context, callback, err);
 
-var xhr_failed = loadSound('wrong_file_name.ogg',  context, callback, err);
+var request_failed = loadSound('wrong_file_name.ogg',  context, callback, err);

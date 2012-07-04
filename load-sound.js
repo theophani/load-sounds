@@ -4,16 +4,19 @@ var loadSound = function(url, context, callback, err) {
 		callback(buffer);
 	};
 
-	var decodeError = function(response) {
-		try {
-			throw 'Error decoding sound at `' + url + '`. This is as good as the error gets. Sorry.';
-		} catch (message) {
-			err(message, response, url);
-		}
-	};
+	var decodeError = function(request) {
+		return function(response) {
+			try {
+				throw 'Error decoding sound at `' + url + '`. This is as good as the error gets. Sorry.';
+			} catch (message) {
+				err(message, request);
+			}
+		};
+	}
 
 	var decodeAudioData = function(e) {
-		context.decodeAudioData(e.currentTarget.response, decodeSuccess, decodeError);
+		var request = e.currentTarget;
+		context.decodeAudioData(request.response, decodeSuccess, decodeError(request));
 	}
 
 	var load = function(url) {

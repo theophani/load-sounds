@@ -38,19 +38,19 @@ var loadSounds = function(soundHash, callback, progress) {
 			after();
 		};
 
-	var handleError = function(message, response, sound) {
-			console.log(message, response);
+	var handleError = function(message, request, sound) {
+			console.log(message, request);
 			sounds.errors.push(sound);
 			after();
 	 };
 
 	sounds.list.forEach(function(sound) {
 		var url = sound.url;
-		var callback = function (buffer) {
+		var callback = function(buffer) {
 			stuffBuffer(buffer, sound);
 		};
-		var err = function (message, response, url) {
-			handleError(message, response, sound);
+		var err = function(message, request) {
+			handleError(message, request, sound);
 		};
 
 		loadSound(url, context, callback, err);

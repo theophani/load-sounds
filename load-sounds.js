@@ -20,13 +20,7 @@ var loadSounds = function(paths, callback, progress) {
 		}
 	};
 
-	var stuffBuffer = function(buffer, i) {
-		sounds[i] = buffer;
-		loaded.push(buffer);
-		after();
-	};
-
-	var handleError = function(message, request) {
+	var err = function(message, request) {
 		console.log(message, request);
 		errors.push(request);
 		after();
@@ -34,10 +28,9 @@ var loadSounds = function(paths, callback, progress) {
 
 	var requests = paths.map(function(url, i) {
 		var callback = function(buffer) {
-			stuffBuffer(buffer, i);
-		};
-		var err = function(message, request) {
-			handleError(message, request);
+			sounds[i] = buffer;
+			loaded.push(buffer);
+			after();
 		};
 
 		return loadSound(url, context, callback, err);

@@ -16,6 +16,13 @@ var ready = function () {
 			playSound(sounds.woody5);
 		}, 500);
 	}
+
+	// test the interface
+	console.log(
+		sounds.errors.length === 1,
+		sounds.loaded.length === 2,
+		sounds.list.length === 3
+	);
 };
 
 var sounds = loadSounds(paths, ready);

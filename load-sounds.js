@@ -1,3 +1,5 @@
+// This function requires loadSound
+
 var loadSounds = function(paths, callback, progress) {
 
 	var context = new webkitAudioContext();

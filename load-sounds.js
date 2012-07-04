@@ -1,23 +1,13 @@
-var loadSounds = function(soundHash, callback, progress) {
+var loadSounds = function(paths, callback, progress) {
 
 	var context = new webkitAudioContext();
 
 	var loaded = [];
 	var errors = [];
-	var list = (function() {
-			var array = [];
-			for (sound in soundHash) {
-				array.push({
-					key: sound,
-					url: soundHash[sound]
-				});
-			}
-			return array;
-		}());
-	var sounds = {};
+	var sounds = [];
 
 	var after = function() {
-			var done = (loaded.length + errors.length) === list.length;
+			var done = (loaded.length + errors.length) === paths.length;
 
 			// callback is an optional trigger after all sounds loaded
 			if (done && callback) {
@@ -31,34 +21,31 @@ var loadSounds = function(soundHash, callback, progress) {
 			}
 		};
 
-	var stuffBuffer = function(buffer, sound) {
-			sound.buffer = buffer;
-			sounds[sound.key] = buffer;
-			loaded.push(sound);
+	var stuffBuffer = function(buffer, i) {
+			sounds[i] = buffer;
+			loaded.push(buffer);
 			after();
 		};
 
-	var handleError = function(message, request, sound) {
+	var handleError = function(message, request) {
 			console.log(message, request);
-			errors.push(sound);
+			errors.push(request);
 			after();
 	 };
 
-	list.forEach(function(sound) {
-		var url = sound.url;
+	var requests = paths.map(function(url, i) {
 		var callback = function(buffer) {
-			stuffBuffer(buffer, sound);
+			stuffBuffer(buffer, i);
 		};
 		var err = function(message, request) {
-			handleError(message, request, sound);
+			handleError(message, request);
 		};
 
-		loadSound(url, context, callback, err);
+		return loadSound(url, context, callback, err);
 	});
 
-	sounds.loaded = loaded;
-	sounds.errors = errors;
-	sounds.list = list;
+	requests.loaded = loaded;
+	requests.errors = errors;
 
-	return sounds;
+	return requests;
 };

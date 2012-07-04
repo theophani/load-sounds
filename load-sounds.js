@@ -33,6 +33,7 @@ var loadSounds = function(soundHash, callback, progress) {
 		};
 
 	var stuffBuffer = function(buffer, sound) {
+			sound.buffer = buffer;
 			sounds[sound.key] = buffer;
 			sounds.loaded.push(sound);
 			after();

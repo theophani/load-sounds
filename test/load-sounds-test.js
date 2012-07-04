@@ -32,7 +32,7 @@ var testInterface = function () {
 	var ready = function () {
 		sounds.loaded.forEach(function (sound, i) {
 			setTimeout(function () {
-				playSound(sounds[sound.key]);
+				playSound(sound.buffer);
 			}, 100 * i);
 		});
 	};

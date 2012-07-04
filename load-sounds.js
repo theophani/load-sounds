@@ -56,16 +56,5 @@ var loadSounds = function(soundHash, callback, progress) {
 		loadSound(url, context, callback, err);
 	});
 
-	sounds.getByUrl = (function() {
-		var keys = {};
-		sounds.list.forEach(function(sound) {
-			keys[sound.url] = sound.key;
-		});
-
-		return function(url) {
-			return sounds[keys[url]];
-		}
-	}());
-
 	return sounds;
 };

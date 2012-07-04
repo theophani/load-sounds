@@ -14,11 +14,11 @@ With these three functions, you could load one or more audio files, and play the
 
 Have fun!
 
-#loadSound
+##loadSound
 
 Utility function for asynchronously loading a sound file into an audioBuffer to be played using an audioContext.
 
-##Usage
+###Usage
 
 Pass `loadSound` the url of a sound file, an audioContext, and a callback which will receive the decoded audioBuffer.
 
@@ -32,11 +32,11 @@ var callback = function (buffer) {
 var request = loadSound(url, context, callback[, err]);
 ```
 
-#loadSounds
+##loadSounds
 
 Map function for using `loadSound` to load an array of sound files into audioBuffers to be played using an audioContext. `loadSound` is a dependency of `loadSounds`.
 
-##Usage
+###Usage
 
 Define an array of urls.
 
@@ -66,11 +66,11 @@ var callback = function (sounds) {
 }
 ```
 
-#playSound
+##playSound
 
 Utility function for playing back audioBuffers in the same audioContext.
 
-##Usage
+###Usage
 
 Play back a sound by calling the playSound function with an audioBuffer.
 

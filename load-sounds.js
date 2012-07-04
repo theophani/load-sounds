@@ -38,12 +38,11 @@ var loadSounds = function(soundHash, callback, progress) {
 			after();
 		};
 
-	var falsifyBuffer = function(response, sound) {
-			var message = 'Error with sound "' + sound.key + ': ' + sound.url + '". \nThis is as good as the error gets. Sorry.';
+	var handleError = function(message, response, sound) {
+			console.log(message, response);
 			sounds.errors.push(sound);
 			after();
-			throw (message);
-		};
+	 };
 
 	sounds.list.forEach(function(sound) {
 		var url = sound.url;
@@ -51,7 +50,7 @@ var loadSounds = function(soundHash, callback, progress) {
 			stuffBuffer(buffer, sound);
 		};
 		var err = function (message, response, url) {
-			falsifyBuffer(response, sound);
+			handleError(message, response, sound);
 		};
 
 		loadSound(url, context, callback, err);

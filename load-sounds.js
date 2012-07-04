@@ -32,13 +32,13 @@ var loadSounds = function(soundHash, callback, progress) {
 			}
 		};
 
-	var stuffBuffer = function(buffer, sound, after) {
+	var stuffBuffer = function(buffer, sound) {
 			sounds[sound.key] = buffer;
 			sounds.loaded.push(sound);
 			after();
 		};
 
-	var falsifyBuffer = function(response, sound, after) {
+	var falsifyBuffer = function(response, sound) {
 			var message = 'Error with sound "' + sound.key + ': ' + sound.url + '". \nThis is as good as the error gets. Sorry.';
 			sounds.errors.push(sound);
 			after();
@@ -46,25 +46,15 @@ var loadSounds = function(soundHash, callback, progress) {
 		};
 
 	sounds.list.forEach(function(sound) {
-		var request = new XMLHttpRequest();
-
-		request.open('GET', sound.url, true);
-		request.responseType = 'arraybuffer';
-
-		request.onload = function() {
-			context.decodeAudioData(
-				request.response,
-				// onSuccess
-				function(buffer) {
-					stuffBuffer(buffer, sound, after);
-				},
-				// onError
-				function(response) {
-					falsifyBuffer(response, sound, after);
-				});
+		var url = sound.url;
+		var callback = function (buffer) {
+			stuffBuffer(buffer, sound);
+		};
+		var err = function (message, response, url) {
+			falsifyBuffer(response, sound);
 		};
 
-		request.send();
+		loadSound(url, context, callback, err);
 	});
 
 	sounds.getByUrl = (function() {

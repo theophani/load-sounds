@@ -2,7 +2,16 @@
 
 var loadSounds = function(paths, callback, progress) {
 
-	var context = new webkitAudioContext();
+	try {
+		var context = new webkitAudioContext();
+	} catch (e) {
+		setTimeout(function() {
+			var p = document.createElement('p');
+			p.innerHTML = 'Failed to create an audioContext.<br>' + e.message;
+			document.body.appendChild(p);
+		}, 10);
+		return;
+	}
 
 	var loaded = [];
 	var errors = [];
@@ -12,12 +21,12 @@ var loadSounds = function(paths, callback, progress) {
 		var done = (loaded.length + errors.length) === paths.length;
 
 		// if callback exists, execute it after all sounds have loaded
-		if (done && callback) {
+		if (done && typeof callback === 'function') {
 			callback(sounds);
 		}
 
 		// progress is an optional intermediate callback
-		if (progress) {
+		if (typeof progress === 'function') {
 			progress(sounds);
 		}
 	};

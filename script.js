@@ -31,7 +31,7 @@ var addKeys = function (sounds) {
 
 var ready = function (sounds) {
 	var p = document.createElement('p');
-	p.innerHTML = requests.errors
+	p.innerHTML = 'errors: ' + requests.errors.length;
 	document.body.appendChild(p);
 
 

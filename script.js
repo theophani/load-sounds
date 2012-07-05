@@ -47,4 +47,8 @@ var ready = function (sounds) {
 	}, 100 * sounds.length);
 };
 
+var p = document.createElement('p');
+p.innerHTML = 'TEST';
+document.body.appendChild(p);
+
 var requests = loadSounds(paths, ready);

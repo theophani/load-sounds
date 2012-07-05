@@ -2,6 +2,10 @@
 
 var loadSounds = function(paths, callback, progress) {
 
+	var p = document.createElement('p');
+	p.innerHTML = 'before';
+	document.body.appendChild(p);
+
 	var context = new webkitAudioContext();
 
 	var loaded = [];

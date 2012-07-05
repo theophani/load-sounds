@@ -1,9 +1,5 @@
 var loadSound = function(url, context, callback, err) {
 
-	var p = document.createElement('p');
-	p.innerHTML = 'loading: ' + url;
-	document.body.appendChild(p);
-
 	var decodeSuccess = function(buffer) {
 		callback(buffer);
 	};

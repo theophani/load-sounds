@@ -32,11 +32,6 @@ var addKeys = function (sounds) {
 };
 
 var ready = function (sounds) {
-	var p = document.createElement('p');
-	p.innerHTML = 'errors: ' + requests.errors.length;
-	document.body.appendChild(p);
-
-
 	sounds.forEach(function (sound, i) {
 		setTimeout(function () {
 			playSound(sound);
@@ -49,12 +44,6 @@ var ready = function (sounds) {
 	}, 100 * sounds.length);
 };
 
-
-var p = document.createElement('p');
-p.innerHTML = 'TEST';
-document.body.appendChild(p);
-
 var requests = loadSounds(paths, ready);
-
 
 }, 2000)

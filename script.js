@@ -32,7 +32,7 @@ var addKeys = function (sounds) {
 var ready = function (sounds) {
 	sounds.forEach(function (sound, i) {
 		setTimeout(function () {
-			playSound(sound);
+			//playSound(sound);
 			makeDiv(i, sound);
 		}, 100 * i);
 	});

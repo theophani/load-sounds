@@ -5,9 +5,11 @@ var loadSounds = function(paths, callback, progress) {
 	try {
 		var context = new webkitAudioContext();
 	} catch (e) {
-		var p = document.createElement('p');
-		p.innerHTML = 'Failed to create an audioContext.<br>' + e.message;
-		document.body.appendChild(p);
+		setTimeout(function() {
+			var p = document.createElement('p');
+			p.innerHTML = 'Failed to create an audioContext.<br>' + e.message;
+			document.body.appendChild(p);
+		}, 10);
 		return;
 	}
 

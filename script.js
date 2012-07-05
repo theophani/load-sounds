@@ -1,11 +1,9 @@
-setTimeout(function() {
-
 var paths = [
 	'woody_1.ogg',
 	'woody_2.ogg',
 	'woody_3.ogg',
 	'woody_4.ogg',
-	'woody_5.ogg',
+	'woody_5.ogg'
 ];
 
 var makeDiv = function (i, sound) {
@@ -45,5 +43,3 @@ var ready = function (sounds) {
 };
 
 var requests = loadSounds(paths, ready);
-
-}, 2000)

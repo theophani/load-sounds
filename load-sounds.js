@@ -2,15 +2,14 @@
 
 var loadSounds = function(paths, callback, progress) {
 
-	var p = document.createElement('p');
-	p.innerHTML = 'before';
-	document.body.appendChild(p);
-
-	var context = new webkitAudioContext();
-
-	var p = document.createElement('p');
-	p.innerHTML = 'after';
-	document.body.appendChild(p);
+	try {
+		var context = new webkitAudioContext();
+	} catch (e) {
+		var p = document.createElement('p');
+		p.innerHTML = 'Failed to create an audioContext.<br>' + e.message;
+		document.body.appendChild(p);
+		return;
+	}
 
 	var loaded = [];
 	var errors = [];

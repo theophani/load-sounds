@@ -1,6 +1,8 @@
 #See it in action
 
-[http://theophani.github.com/load-sounds/](http://theophani.github.com/load-sounds/)
+An example using the functions in this repo: [http://theophani.github.com/load-sounds/](http://theophani.github.com/load-sounds/)
+
+Some wicked WebAudio demos to get you excited: [Web Audio API Demos](http://chromium.googlecode.com/svn/trunk/samples/audio/samples.html)
 
 #WTF
 

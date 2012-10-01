@@ -1,3 +1,7 @@
+#See it in action
+
+[http://theophani.github.com/load-sounds/](http://theophani.github.com/load-sounds/)
+
 #WTF
 
 To have full control over audio files using the latest HTML5 APIs, your content must be of type arraybuffer, which is needed so you can decode it. The only way I can see to get your content as type arraybuffer is to load it using XMLHttpRequest with content of type arraybuffer.
